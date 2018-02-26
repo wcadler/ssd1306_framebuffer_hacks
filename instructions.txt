@@ -1,0 +1,12 @@
+Found the instructions on this website: https://www.raspberrypi.org/forums/viewtopic.php?t=106457
+- Credit goes to ighea on the forum... I'm just going to copy what he did... :)
+
+
+1. DTC: dtc -@ -I dts -O dtb -o oled.dtbo oled.dts && mv oled.dtbo /boot/overlays/
+2. Make:
+3. Copy: cp ssd1307fb.ko /lib/modules/$(uname -r)/kernel/drivers/video/fbdev/ssd1307fb.ko
+4. Enable Overlay: droverlay oled
+5. Should see the following messages in dmesg:
+Feb  4 18:42:50 raspberrypi kernel: [   73.626023] ssd1307fb: loading out-of-tree module taints kernel.
+Feb  4 18:42:50 raspberrypi kernel: [   73.635531] ssd1307fb 1-003c: fb1: Solomon SSD1307 framebuffer device registered, using 1024 bytes of video memory
+And /dev/fb1 should appear on devices.
